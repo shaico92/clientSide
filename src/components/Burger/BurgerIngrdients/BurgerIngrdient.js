@@ -2,7 +2,7 @@ import React from 'react'
 
 import classes from './BurgerIngredient.css';
 
-import Aux from '../../../hoc/Auxillary'
+import Aux from '../../../hoc/Auxillary/Auxillary'
 import PropTypes from 'prop-types';
 const burgerIngridient = (props)=>{
 

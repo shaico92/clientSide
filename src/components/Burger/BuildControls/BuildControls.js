@@ -4,7 +4,7 @@ import classes from './BuildControls.css'
 
 import BuildControl from './BuildControl/BuildControl'
 
-import Aux from '../../../hoc/Auxillary'
+import Aux from '../../../hoc/Auxillary/Auxillary'
 const controls=[
     {label : 'Salad', type: 'salad'},
     {label : 'Bacon', type: 'bacon'},
