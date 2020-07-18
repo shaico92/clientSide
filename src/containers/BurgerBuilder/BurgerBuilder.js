@@ -35,12 +35,15 @@ class BurgerBuilder extends Component{
         purchasable : false,
         purchasing : false,
         loading : false,
+        error : null
     }
 
         componentDidMount(){
             axios.get('/checkout').then(res=>{
                 console.log(res)
-                this.setState({ingridients : res.data.ingridients})
+                this.setState({ingridients : res.data.ingridients, totalPrice : res.data.totalPrice})
+            }).catch(err=>{
+                this.setState({error : true})
             })
         }
 
@@ -174,7 +177,7 @@ class BurgerBuilder extends Component{
              orderSummary=<Spinner/>
             
         }
-        let burger = <Spinner/>
+        let burger =this.state.error ? <p style={{textAlign: "center",color : 'red'}}>Ingridients cant be loaded </p> :  <Spinner/>
         if (this.state.ingridients) {
             burger =(<Aux>
                 <Burger ingridients={this.state.ingridients}/>
