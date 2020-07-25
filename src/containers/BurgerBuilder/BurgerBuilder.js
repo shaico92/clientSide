@@ -39,7 +39,7 @@ class BurgerBuilder extends Component{
     }
 
         componentDidMount(){
-            axios.get('/checkout').then(res=>{
+            axios.get('/').then(res=>{
                 console.log(res)
                 this.setState({ingridients : res.data.ingridients, totalPrice : res.data.totalPrice})
             }).catch(err=>{
@@ -111,31 +111,40 @@ class BurgerBuilder extends Component{
 
     purchaseContinueHandler = ()=>{
         
-        this.setState({loading : true})        
-        const order = {
-          ings:  this.state.ingridients,
-         price : this.state.totalPrice,
-         customer : {
-             name:'shai',
-             address: {
-                    street: 'test',
-                    zipcode : '1241',
-                    country: 'israel'
-             }
-         }
-        }
+        // this.setState({loading : true})        
+        // const order = {
+        //   ings:  this.state.ingridients,
+        //  price : this.state.totalPrice,
+        //  customer : {
+        //      name:'shai',
+        //      address: {
+        //             street: 'test',
+        //             zipcode : '1241',
+        //             country: 'israel'
+        //      }
+        //  }
+        // }
 
         
-        axios.post('/checkout', order)
-        .then(res=>{
-            console.log(res)
-            this.setState({loading : false , purchasing : false})
+        // axios.post('/checkout', order)
+        // .then(res=>{
+        //     console.log(res)
+        //     this.setState({loading : false , purchasing : false})
             
+        // })
+        // .catch(err=>{console.log(err)
+        //     this.setState({loading : false , purchasing : false})
+        // })
+
+        let queryParamas =[];
+        for(let i in this.state.ingridients){
+            queryParamas.push(encodeURIComponent(i)+'='+encodeURIComponent(this.state.ingridients[i]));
+        }
+        const queyString = queryParamas.join('&');
+        this.props.history.push({
+            pathname : '/checkout',
+            search : '?'+queyString
         })
-        .catch(err=>{console.log(err)
-            this.setState({loading : false , purchasing : false})
-        })
-        
     }
 
     removeIngridientHandler =(type)=>{
