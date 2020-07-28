@@ -6,7 +6,7 @@ import classes from './NavigationItems.css'
 const navigationItems =props=>(
         
             <ul className={classes.NavigationItems}>
-                <NavigationItem active link='/lol'>Burger Builder</NavigationItem>
+                <NavigationItem active link='/'>Burger Builder</NavigationItem>
                 <NavigationItem link='/lol1'>Checkout</NavigationItem>
                 
             </ul>

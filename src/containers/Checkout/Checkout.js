@@ -9,20 +9,12 @@ import {Route} from 'react-router-dom'
 class Checkout extends Component{
 
     state={
-        ingridients : {
-            salad :0,
-            bacon : 0 ,
-            cheese : 0,
-            meat : 0,
-            
-            
-            
-        }
+        ingridients : null
         ,
-        totalPrice:''
+        totalPrice: 0 
     }
-
-    componentDidMount(){
+//instead of didmount to prevent from rendering a null object before it is intialized
+    componentWillMount(){
         const query = new URLSearchParams(this.props.location.search);
         const _ingridients =   {};
         let totalPrice =null;
@@ -38,8 +30,8 @@ class Checkout extends Component{
         if (totalPrice!==null) {
             totalPrice=totalPrice.toFixed(2);
         }
-        this.setState({totalPrice : totalPrice})
-        this.setState({ingridients : _ingridients});
+        
+        this.setState({ingridients : _ingridients,totalPrice : totalPrice});
         
     }
     checkoutCancelledHandler=()=>{
@@ -49,6 +41,8 @@ class Checkout extends Component{
         
         this.props.history.replace('/checkout/contact-data')
     }
+
+    
     render(){
 
         return(

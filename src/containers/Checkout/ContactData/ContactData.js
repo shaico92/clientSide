@@ -1,24 +1,45 @@
 import React ,{Component} from 'react';
 
 import Button from '../../../components/UI/Button/Button'
-
+import axios from '../../../axios-orders'
 import classes from './ContactData.css'
 class ContactData extends Component{
 
     state={
+        customer:{
             name:'',
             email:'',
-            adress:{
+            address:{
                 street:'',
-                postalCode: ''
+                zipcode: 121123123,
+                country : ''
             },
-            loading : false
+            
     }
+    }
+
 
 orderHandler = (event)=>{
     event.preventDefault();
-    console.log(this.props.ingridients)
-    console.log(this.props.totalPrice)
+    const customer = {...this.state.customer}
+    const ings = {...this.props.ingridients}
+    const price = this.props.totalPrice
+    const order ={
+        customer,
+        ings,
+        price,
+        
+    }   
+    console.log(order)
+    axios.post('/checkout/contact-data',order)
+        .then(res=>{
+            console.log(res)
+            
+            
+        })
+        .catch(err=>{console.log(err)
+            
+        }) 
 
 }
 render(){
