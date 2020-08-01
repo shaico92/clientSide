@@ -38,13 +38,22 @@ class BurgerBuilder extends Component{
         error : null
     }
 
+    getIngridientsFromServer=()=>{
+        
+        axios.get('/').then(res=>{
+            
+                    this.setState({ingridients : res.data.ingridients, totalPrice : res.data.totalPrice})
+            
+            
+        }).catch(err=>{
+            this.setState({error : true})
+        })
+    }
         componentDidMount(){
-            axios.get('/').then(res=>{
-                console.log(res)
-                this.setState({ingridients : res.data.ingridients, totalPrice : res.data.totalPrice})
-            }).catch(err=>{
-                this.setState({error : true})
-            })
+            
+                this.getIngridientsFromServer(); 
+                
+            
         }
 
 

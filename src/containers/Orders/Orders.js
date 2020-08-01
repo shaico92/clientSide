@@ -2,7 +2,7 @@ import React ,{Component} from 'react';
 
 import Order from '../../components/Order/Order'
 import axios from '../../axios-orders'
-import order from '../../components/Order/Order';
+
 class Orders extends Component{
 
 state={
@@ -19,7 +19,7 @@ state={
                     fetchedOrders.push({...res.data.order[key],
                         id:key
                     });
-                    console.log(res.data.order)
+                    
             }
             this.setState({loading : false,orders : fetchedOrders})       
         })
